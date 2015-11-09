@@ -16,9 +16,10 @@ public class Jogo {
 	//Apontador para o item da sequência que está sendo digitado agora pelo usuário.
 	private int indice;
 	
-	//Gerencia a interface gráfica do jogo
-	private Graph geniusForm;
-	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	//Reinicia o jogo.
 	public void reiniciar() {
 		this.sequencia = new ArrayList<Cor>();
@@ -29,11 +30,6 @@ public class Jogo {
 		return this.status;
 	}
 	
-	public void formCreate(){
-        geniusForm = new Graph();
-        geniusForm.setVisible(true);
-        this.reiniciar();
-	}
 	//Gera uma cor aleatoriamente.
 	private Cor geraCor() {
 		Random random = new Random();
@@ -53,16 +49,12 @@ public class Jogo {
 	//Chama o método que dá o feedback visual/sonoro para cada item da sequência, bloqueando os comandos no processo.
 	private void demonstrar() {
 		this.status = Status.DEMONSTRANDO;
-		for (int i = 0; i < this.sequencia.size(); i++) {
-			geniusForm.feedback(this.sequencia.get(i));
-		}
 		this.indice = 0;
-		this.status = Status.JOGAR;
 	}
 
 	//Dá o feedback sonoro apropriado para o erro do usuário.
 	private void feedbackErro() {
-		//...
+		System.out.println("ERRRRROOU");
 	}
 
 	//Trata apropriadamente o comando recebido (pressionamento dos botões).
@@ -100,12 +92,19 @@ public class Jogo {
 		  }
 	}
 	
+	public ArrayList<Cor> getSequencia() {
+		return sequencia;
+	}
+
+	public void setSequencia(ArrayList<Cor> sequencia) {
+		this.sequencia = sequencia;
+	}
+
 	//Avalia uma jogada do usuário, que corresponde ao pressionamento de um botão colorido:
 	// - Verifica se a cor informada corresponde à cor apontada na sequência e neste caso avança o apontador.
 	// - Se o apontador alcançou o fim da sequência, chama o método que gera uma próxima sequência.
 	// - Se a cor informada não corresponde à cor apontada, chama o feedback sonoro de erro e reinicia o jogo.
 	private void computarJogada(Cor cor) {
-		geniusForm.feedback(cor);
 		if (cor == this.sequencia.get(this.indice)) {
 			this.indice++;
 			if (this.indice == this.sequencia.size()) {

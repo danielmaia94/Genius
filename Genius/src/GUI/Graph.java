@@ -64,7 +64,6 @@ public class Graph extends JFrame {
 	public static final int WINDOW_BORDER_WIDTH = 16;
 	public static final int WINDOW_BORDER_HEIGHT = 38;
 	
-	
 	JPanel panel;
 
     public Graph() {
@@ -78,12 +77,38 @@ public class Graph extends JFrame {
     public void feedback(Cor Color) {
         ((GeniusPanel)panel).feedback(Color);
     }
+    public Botao getButtonClicked(){
+    	switch (((GeniusPanel)panel).buttonClicked){
+    	case BUTTON_ID_BLUE   : return Botao.AZUL;
+    	case BUTTON_ID_GREEN  : return Botao.VERDE;
+    	case BUTTON_ID_RED    : return Botao.VERMELHO;
+    	case BUTTON_ID_YELLOW : return Botao.AMARELO;
+    	default : return null; 
+    	}
+    }
+    public boolean getWasButtonClicked(){
+    	return (((GeniusPanel)panel).getWasButtonClicked());
+    }
+    public void setWasButtonClicked(boolean state){
+    	((GeniusPanel)panel).setWasButtonClicked(state);
+    }
     public 
     
     class GeniusPanel extends JPanel implements MouseListener {
-        private final ArrayList<Shape> shapes;
-        private final ArrayList<Color> colors;
 
+		private final ArrayList<Shape> shapes;
+        private final ArrayList<Color> colors;
+        public int buttonClicked;
+        public boolean wasButtonClicked;
+        
+    	public boolean getWasButtonClicked() {
+			return wasButtonClicked;
+		}
+
+		public void setWasButtonClicked(boolean wasButtonClicked) {
+			this.wasButtonClicked = wasButtonClicked;
+		}
+        
         public GeniusPanel() {
             addMouseListener(this);
 
@@ -225,18 +250,27 @@ public class Graph extends JFrame {
         			System.out.println("Clicked SPEED");
         		} else if (shapeClicked(shapes.get(MINIBUTTON_ID_REPEAT), e)) {
         			System.out.println("Clicked REPEAT");
+        			
         		} else if (shapeClicked(shapes.get(MINIBUTTON_ID_RESET), e)) {
         			System.out.println("Clicked RESET");
         		}
         	} else {
         		if (shapeClicked(shapes.get(BUTTON_ID_GREEN), e)) {
         			System.out.println("Clicked GREEN");
+        			buttonClicked = BUTTON_ID_GREEN;
+        			wasButtonClicked = true;
         		} else if (shapeClicked(shapes.get(BUTTON_ID_RED), e)) {
         			System.out.println("Clicked RED");
+        			buttonClicked = BUTTON_ID_RED;
+        			wasButtonClicked = true;
         		} else if (shapeClicked(shapes.get(BUTTON_ID_YELLOW), e)) {
         			System.out.println("Clicked YELLOW");
+        			buttonClicked = BUTTON_ID_YELLOW;
+        			wasButtonClicked = true;
         		} else if (shapeClicked(shapes.get(BUTTON_ID_BLUE), e)) {
         			System.out.println("Clicked BLUE");
+        			buttonClicked = BUTTON_ID_BLUE;
+        			wasButtonClicked = true;
         		}
         	}
         }
@@ -248,6 +282,7 @@ public class Graph extends JFrame {
 //            	sleep(1000);
             	colors.set(BUTTON_ID_BLUE, COLOR_BUTTON_BLUE_OFF);
             	repaint();
+            	System.out.println(" Blue");
         		break;
     		case AMARELA:
 	    		colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_ON);
@@ -255,6 +290,7 @@ public class Graph extends JFrame {
 	//        	sleep(1000);
 	        	colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_OFF);
 	        	repaint();
+	        	System.out.println(" yellow");
 	    		break;
     		case VERDE:
 	    		colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_ON);
@@ -262,6 +298,7 @@ public class Graph extends JFrame {
 	//        	sleep(1000);
 	        	colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_OFF);
 	        	repaint();
+	        	System.out.println(" green");
 	    		break;
     		case VERMELHA:
 	    		colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_ON);
@@ -269,6 +306,7 @@ public class Graph extends JFrame {
 	//        	sleep(1000);
 	        	colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_OFF);
 	        	repaint();
+	        	System.out.println(" red");
 	    		break;		
     	}
 
