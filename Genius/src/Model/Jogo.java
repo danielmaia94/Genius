@@ -16,6 +16,9 @@ public class Jogo {
 	//Apontador para o item da sequência que está sendo digitado agora pelo usuário.
 	private int indice;
 	
+	//Gerencia a interface gráfica do jogo
+	private Graph geniusForm;
+	
 	//Reinicia o jogo.
 	public void reiniciar() {
 		this.sequencia = new ArrayList<Cor>();
@@ -25,10 +28,10 @@ public class Jogo {
 	public Status getStatus(){
 		return this.status;
 	}
-
-	public void createForm(){
-        Graph g1 = new Graph();
-        g1.setVisible(true);
+	
+	public void formCreate(){
+        geniusForm = new Graph();
+        geniusForm.setVisible(true);
         this.reiniciar();
 	}
 	//Gera uma cor aleatoriamente.
@@ -51,20 +54,12 @@ public class Jogo {
 	private void demonstrar() {
 		this.status = Status.DEMONSTRANDO;
 		for (int i = 0; i < this.sequencia.size(); i++) {
-			feedback(this.sequencia.get(i));
-			//criar um timer para aguardar determinado tempo para demonstrar próxima jogada
+			geniusForm.feedback(this.sequencia.get(i));
 		}
 		this.indice = 0;
 		this.status = Status.JOGAR;
 	}
 
-	//Dá o feedback visual/sonoro apropriado para a cor:
-	// - Mostra o botão específico com efeito de brilho e toca o respectivo tom.
-	private void feedback(Cor cor) {
-		g1.demonstraJogada(cor);
-		 }
-	}
-	
 	//Dá o feedback sonoro apropriado para o erro do usuário.
 	private void feedbackErro() {
 		//...
@@ -110,7 +105,7 @@ public class Jogo {
 	// - Se o apontador alcançou o fim da sequência, chama o método que gera uma próxima sequência.
 	// - Se a cor informada não corresponde à cor apontada, chama o feedback sonoro de erro e reinicia o jogo.
 	private void computarJogada(Cor cor) {
-		feedback(cor);
+		geniusForm.feedback(cor);
 		if (cor == this.sequencia.get(this.indice)) {
 			this.indice++;
 			if (this.indice == this.sequencia.size()) {

@@ -64,6 +64,7 @@ public class Graph extends JFrame {
 	public static final int WINDOW_BORDER_WIDTH = 16;
 	public static final int WINDOW_BORDER_HEIGHT = 38;
 	
+	
 	JPanel panel;
 
     public Graph() {
@@ -74,7 +75,11 @@ public class Graph extends JFrame {
         panel = new GeniusPanel();
         add(panel);
     }
-
+    public void feedback(Cor Color) {
+        ((GeniusPanel)panel).feedback(Color);
+    }
+    public 
+    
     class GeniusPanel extends JPanel implements MouseListener {
         private final ArrayList<Shape> shapes;
         private final ArrayList<Color> colors;
@@ -156,32 +161,16 @@ public class Graph extends JFrame {
 			final double height = GAME_HEIGHT * 0.9;
 			
 			shapes.add(new Arc2D.Double(x, y, width, height, 90, 90, Arc2D.PIE));
-			if (checkButtonPressed(BUTTON_ID_GREEN)) {
-				colors.add(COLOR_BUTTON_GREEN_ON);	
-			} else {
-				colors.add(COLOR_BUTTON_GREEN_OFF);
-			}
+			colors.add(COLOR_BUTTON_GREEN_OFF);
             
             shapes.add(new Arc2D.Double(x, y, width, height, 0, 90, Arc2D.PIE));
-            if (checkButtonPressed(BUTTON_ID_RED)) {
-				colors.add(COLOR_BUTTON_RED_ON);	
-			} else {
-				colors.add(COLOR_BUTTON_RED_OFF);
-			}
+			colors.add(COLOR_BUTTON_RED_OFF);
 
             shapes.add(new Arc2D.Double(x, y, width, height, 270, 90, Arc2D.PIE));
-            if (checkButtonPressed(BUTTON_ID_BLUE)) {
-				colors.add(COLOR_BUTTON_BLUE_ON);	
-			} else {
-				colors.add(COLOR_BUTTON_BLUE_OFF);
-			}
+			colors.add(COLOR_BUTTON_BLUE_OFF);
             
             shapes.add(new Arc2D.Double(x, y, width, height, 180, 90, Arc2D.PIE));
-            if (checkButtonPressed(BUTTON_ID_YELLOW)) {
-				colors.add(COLOR_BUTTON_YELLOW_ON);	
-			} else {
-				colors.add(COLOR_BUTTON_YELLOW_OFF);
-			}
+            colors.add(COLOR_BUTTON_YELLOW_OFF);
 		}
 
 		private void drawSpacers() {
@@ -251,23 +240,39 @@ public class Graph extends JFrame {
         		}
         	}
         }
-        public void demonstraJogada(Botao botao) {
-    		switch (botao) {
-			case AMARELO:
-				System.out.println("Clicked YELLOW");
-				break;
-			case VERMELHO:
-				System.out.println("Clicked RED");
-		        break;
-			case AZUL:
-				System.out.println("Clicked BLUE");
-		        break;
-			case VERDE:
-				System.out.println("Clicked GREEN");
-		        break;
-	        }
+        public void feedback(Cor cor) {
+        	switch (cor) {
+        	case AZUL:
+        		colors.set(BUTTON_ID_BLUE, COLOR_BUTTON_BLUE_ON);
+        		repaint();
+//            	sleep(1000);
+            	colors.set(BUTTON_ID_BLUE, COLOR_BUTTON_BLUE_OFF);
+            	repaint();
+        		break;
+    		case AMARELA:
+	    		colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_ON);
+	    		repaint();
+	//        	sleep(1000);
+	        	colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_OFF);
+	        	repaint();
+	    		break;
+    		case VERDE:
+	    		colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_ON);
+	    		repaint();
+	//        	sleep(1000);
+	        	colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_OFF);
+	        	repaint();
+	    		break;
+    		case VERMELHA:
+	    		colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_ON);
+	    		repaint();
+	//        	sleep(1000);
+	        	colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_OFF);
+	        	repaint();
+	    		break;		
+    	}
+
         }
-        
         
         private String getCurrentScore() {
         	return "000";
@@ -275,10 +280,6 @@ public class Graph extends JFrame {
         
         private String getHighScore() {
         	return "111";
-        }
-        
-        private boolean checkButtonPressed(int ButtonId) {
-        	return true;
         }
         
         private boolean shapeClicked(Shape shape, MouseEvent e) {
