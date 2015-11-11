@@ -9,6 +9,8 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import Model.*;
 
 public class Graph extends JFrame {
@@ -258,22 +260,18 @@ public class Graph extends JFrame {
         		if (shapeClicked(shapes.get(BUTTON_ID_GREEN), e)) {
         			System.out.println("Clicked GREEN");
         			buttonClicked = BUTTON_ID_GREEN;
-        			wasButtonClicked = true;
         			Main.computesMove();
         		} else if (shapeClicked(shapes.get(BUTTON_ID_RED), e)) {
         			System.out.println("Clicked RED");
         			buttonClicked = BUTTON_ID_RED;
-        			wasButtonClicked = true;
         			Main.computesMove();
         		} else if (shapeClicked(shapes.get(BUTTON_ID_YELLOW), e)) {
         			System.out.println("Clicked YELLOW");
         			buttonClicked = BUTTON_ID_YELLOW;
-        			wasButtonClicked = true;
         			Main.computesMove();
         		} else if (shapeClicked(shapes.get(BUTTON_ID_BLUE), e)) {
         			System.out.println("Clicked BLUE");
         			buttonClicked = BUTTON_ID_BLUE;
-        			wasButtonClicked = true;
         			Main.computesMove();
         		}
         	}
@@ -283,7 +281,7 @@ public class Graph extends JFrame {
         	case AZUL:
         		colors.set(BUTTON_ID_BLUE, COLOR_BUTTON_BLUE_ON);
         		repaint();
-//            	sleep(1000);
+        		waitOneSecond();
             	colors.set(BUTTON_ID_BLUE, COLOR_BUTTON_BLUE_OFF);
             	repaint();
             	System.out.println(" Blue");
@@ -291,7 +289,7 @@ public class Graph extends JFrame {
     		case AMARELA:
 	    		colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_ON);
 	    		repaint();
-	//        	sleep(1000);
+	    		waitOneSecond();
 	        	colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_OFF);
 	        	repaint();
 	        	System.out.println(" yellow");
@@ -299,7 +297,7 @@ public class Graph extends JFrame {
     		case VERDE:
 	    		colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_ON);
 	    		repaint();
-	//        	sleep(1000);
+	    		waitOneSecond();
 	        	colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_OFF);
 	        	repaint();
 	        	System.out.println(" green");
@@ -307,7 +305,7 @@ public class Graph extends JFrame {
     		case VERMELHA:
 	    		colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_ON);
 	    		repaint();
-	//        	sleep(1000);
+	    		waitOneSecond();
 	        	colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_OFF);
 	        	repaint();
 	        	System.out.println(" red");
@@ -318,6 +316,13 @@ public class Graph extends JFrame {
         
         private String getCurrentScore() {
         	return "000";
+        }
+        
+        public void waitOneSecond() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+            }
         }
         
         private String getHighScore() {
