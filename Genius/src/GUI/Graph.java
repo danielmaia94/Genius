@@ -1,5 +1,5 @@
 package GUI;
-
+import Controller.Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -259,18 +259,22 @@ public class Graph extends JFrame {
         			System.out.println("Clicked GREEN");
         			buttonClicked = BUTTON_ID_GREEN;
         			wasButtonClicked = true;
+        			Main.computesMove();
         		} else if (shapeClicked(shapes.get(BUTTON_ID_RED), e)) {
         			System.out.println("Clicked RED");
         			buttonClicked = BUTTON_ID_RED;
         			wasButtonClicked = true;
+        			Main.computesMove();
         		} else if (shapeClicked(shapes.get(BUTTON_ID_YELLOW), e)) {
         			System.out.println("Clicked YELLOW");
         			buttonClicked = BUTTON_ID_YELLOW;
         			wasButtonClicked = true;
+        			Main.computesMove();
         		} else if (shapeClicked(shapes.get(BUTTON_ID_BLUE), e)) {
         			System.out.println("Clicked BLUE");
         			buttonClicked = BUTTON_ID_BLUE;
         			wasButtonClicked = true;
+        			Main.computesMove();
         		}
         	}
         }

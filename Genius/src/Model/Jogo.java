@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;		//Provê funcionalidades da lista de cores.
 import java.util.Random;		//Provê funcionalidade de geração de valores aleatórios.
-
+import Controller.Main;
 import GUI.Graph;
 
 public class Jogo {
@@ -50,6 +50,7 @@ public class Jogo {
 	private void demonstrar() {
 		this.status = Status.DEMONSTRANDO;
 		this.indice = 0;
+		Main.showMove();
 	}
 
 	//Dá o feedback sonoro apropriado para o erro do usuário.
