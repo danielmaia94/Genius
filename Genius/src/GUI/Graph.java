@@ -250,6 +250,11 @@ public class Graph extends JFrame {
         	if (shapeClicked(shapes.get(PANEL_ID), e)) {
         		if (shapeClicked(shapes.get(MINIBUTTON_ID_SPEED), e)) {
         			System.out.println("Clicked SPEED");
+    	    		colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_ON);
+    	    		repaint();
+    	    		waitOneSecond();
+    	        	colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_OFF);
+    	        	repaint();
         		} else if (shapeClicked(shapes.get(MINIBUTTON_ID_REPEAT), e)) {
         			System.out.println("Clicked REPEAT");
         			
@@ -290,7 +295,7 @@ public class Graph extends JFrame {
 	    		colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_ON);
 	    		repaint();
 	    		waitOneSecond();
-	        	colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_OFF);
+	    		colors.set(BUTTON_ID_YELLOW, COLOR_BUTTON_YELLOW_OFF);
 	        	repaint();
 	        	System.out.println(" yellow");
 	    		break;
@@ -298,18 +303,18 @@ public class Graph extends JFrame {
 	    		colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_ON);
 	    		repaint();
 	    		waitOneSecond();
-	        	colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_OFF);
+	    		colors.set(BUTTON_ID_GREEN, COLOR_BUTTON_GREEN_OFF);
 	        	repaint();
 	        	System.out.println(" green");
-	    		break;
+	        	break;
     		case VERMELHA:
 	    		colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_ON);
 	    		repaint();
 	    		waitOneSecond();
-	        	colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_OFF);
+	    		colors.set(BUTTON_ID_RED, COLOR_BUTTON_RED_OFF);
 	        	repaint();
 	        	System.out.println(" red");
-	    		break;		
+	        	break;		
     	}
 
         }

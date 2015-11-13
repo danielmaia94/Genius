@@ -16,18 +16,30 @@ public class Jogo {
 	//Apontador para o item da sequência que está sendo digitado agora pelo usuário.
 	private int indice;
 	
+	
+	public int getScore() {
+		return sequencia.size();
+	}
+
+	public Status getStatus(){
+		return this.status;
+	}
+	
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	public ArrayList<Cor> getSequencia() {
+		return sequencia;
+	}
 
+	public void setSequencia(ArrayList<Cor> sequencia) {
+		this.sequencia = sequencia;
+	}
+	
 	//Reinicia o jogo.
 	public void reiniciar() {
 		this.sequencia = new ArrayList<Cor>();
 		this.proxima();
-	}
-	
-	public Status getStatus(){
-		return this.status;
 	}
 	
 	//Gera uma cor aleatoriamente.
@@ -91,14 +103,6 @@ public class Jogo {
 				this.redesenhar();
 		    	break;
 		  }
-	}
-	
-	public ArrayList<Cor> getSequencia() {
-		return sequencia;
-	}
-
-	public void setSequencia(ArrayList<Cor> sequencia) {
-		this.sequencia = sequencia;
 	}
 
 	//Avalia uma jogada do usuário, que corresponde ao pressionamento de um botão colorido:
