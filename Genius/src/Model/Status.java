@@ -1,5 +1,5 @@
 package Model;
 
 public enum Status {
-	JOGAR, DEMONSTRANDO, GAMEOVER;
+	PLAY, RUNNING;
 }
