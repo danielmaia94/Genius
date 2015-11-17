@@ -102,28 +102,20 @@ public class Drawer {
 	}
 	
 	public Button getPressedButton(Point point) {
-		Button pressedButton = null;
-		for (int i = 0; i < elementList.size(); i++) {
+
+		for (int i = elementList.size()-1; i>=0;  i--) {
 			if (elementList.get(i).shapeClicked(point)) {
-				if (elementList.get(i).getButton() != null) {
-					pressedButton = elementList.get(i).getButton();
-					if (!pressedButton.isColorButton()) {
-						return pressedButton;
-					}
-				} else if (pressedButton != null) {
-					if (elementList.get(i).getCoverButton() && pressedButton.isColorButton()) {
-						pressedButton = null;
-					}
-				}
+					return elementList.get(i).getButton();
 			}
 		}
-		return pressedButton;
+		return null;
 	}
 	
 	private void createBody() {
 		Shape shape = new Ellipse2D.Double(0, 0, Drawer.GAME_WIDTH, Drawer.GAME_HEIGHT);
 		Color color = COLOR_BODY;
-		Element.createAndAdd(shape, color, elementList);
+		Element element = new Element(shape, color);
+		elementList.add(element);
 	}
 	
 	private void createColorButtons() {
@@ -135,47 +127,56 @@ public class Drawer {
 		final double y = GAME_HEIGHT * 0.05;
 		final double width = GAME_WIDTH * 0.9;
 		final double height = GAME_HEIGHT * 0.9;
+		Element element;
 		
 		shape = new Arc2D.Double(x, y, width, height, 90, 90, Arc2D.PIE);
 		color = COLOR_BUTTON_GREEN_OFF;
 		colorEnabled = COLOR_BUTTON_GREEN_ON;
 		button = Button.GREEN;
-		Element.createAndAdd(shape, color, colorEnabled, button, elementList);
+		element = new Element(shape, color, colorEnabled, button);
+		elementList.add(element);
         
 		shape = new Arc2D.Double(x, y, width, height, 0, 90, Arc2D.PIE);
 		color = COLOR_BUTTON_RED_OFF;
 		colorEnabled = COLOR_BUTTON_RED_ON;
 		button = Button.RED;
-		Element.createAndAdd(shape, color, colorEnabled, button, elementList);
+		element = new Element(shape, color, colorEnabled, button);
+		elementList.add(element);
 
 		shape = new Arc2D.Double(x, y, width, height, 270, 90, Arc2D.PIE);
 		color = COLOR_BUTTON_BLUE_OFF;
 		colorEnabled = COLOR_BUTTON_BLUE_ON;
 		button = Button.BLUE;
-		Element.createAndAdd(shape, color, colorEnabled, button, elementList);
+		element = new Element(shape, color, colorEnabled, button);
+		elementList.add(element);
         
 		shape = new Arc2D.Double(x, y, width, height, 180, 90, Arc2D.PIE);
 		color = COLOR_BUTTON_YELLOW_OFF;
 		colorEnabled = COLOR_BUTTON_YELLOW_ON;
 		button = Button.YELLOW;
-		Element.createAndAdd(shape, color, colorEnabled, button, elementList);
+		element = new Element(shape, color, colorEnabled, button);
+		elementList.add(element);
 	}
 	
 	private void createSpacers() {
 		Shape shape;
 		Color color;
+		Element element;
 		
 		shape = new Rectangle2D.Double(288, 15, 24, 570);
 		color = COLOR_BODY;
-		Element.createAndAdd(shape, color, elementList);
+		element = new Element(shape, color);
+		elementList.add(element);
         
         shape = new Rectangle2D.Double(15, 288, 570, 24);
         color = COLOR_BODY;
-		Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color);
+		elementList.add(element);
 
         shape = new Ellipse2D.Double(150, 150, 300, 300);
         color = COLOR_BODY;
-		Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color);
+		elementList.add(element);
 	}
 	
 	private void createPanel() {
@@ -185,7 +186,8 @@ public class Drawer {
 		final double height = GAME_HEIGHT * 0.4;
 		Shape shape = new Ellipse2D.Double(x, y, width, height);
         Color color = COLOR_PANEL;
-		Element.createAndAdd(shape, color, elementList);
+        Element element = new Element(shape, color);
+		elementList.add(element);
 	}
 	
 	private void createDisplays() {
@@ -196,14 +198,17 @@ public class Drawer {
 		final double height = GAME_HEIGHT * 0.0625;
 		Shape shape;
 		Color color;
+		Element element;
 		
 		shape = new Rectangle2D.Double(xScore, y, width, height);
         color = COLOR_LCD_BACKGROUND;
-		Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color);
+		elementList.add(element);
         
         shape = new Rectangle2D.Double(xHiScore, y, width, height);
         color = COLOR_LCD_BACKGROUND;
-		Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color);
+		elementList.add(element);
 	}
 	
 	private void createMiniButtons() {
@@ -217,27 +222,34 @@ public class Drawer {
 		final double vBorder = GAME_HEIGHT * 0.005;
 		Shape shape;
 		Color color;
+		Element element;
 		
 		shape = new Ellipse2D.Double(xSpeed, y, width, height);
         color = COLOR_MINIBUTTON_BORDER_SPEED;
-        Element.createAndAdd(shape, color, Button.SPEED, elementList);
+        element = new Element(shape, color, color, Button.SPEED);
+		elementList.add(element);
         shape = new Ellipse2D.Double(xSpeed + hBorder, y + vBorder, width - hBorder * 2, height - vBorder * 2);
         color = COLOR_MINIBUTTON_SPEED;
-        Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color, color, Button.SPEED);
+		elementList.add(element);
         
         shape = new Ellipse2D.Double(xRepeat, y, width, height);
         color = COLOR_MINIBUTTON_BORDER_REPEAT;
-		Element.createAndAdd(shape, color, Button.REPEAT, elementList);
+        element = new Element(shape, color, color, Button.REPEAT);
+		elementList.add(element);
         shape = new Ellipse2D.Double(xRepeat + hBorder, y + vBorder, width - hBorder * 2, height - vBorder * 2);
         color = COLOR_MINIBUTTON_REPEAT;
-        Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color, color, Button.REPEAT);
+		elementList.add(element);
         
         shape = new Ellipse2D.Double(xReset, y, width, height);
         color = COLOR_MINIBUTTON_BORDER_RESET;
-        Element.createAndAdd(shape, color, Button.RESET, elementList);
+        element = new Element(shape, color, color, Button.RESET);
+		elementList.add(element);
         shape = new Ellipse2D.Double(xReset + hBorder, y + vBorder, width - hBorder * 2, height - vBorder * 2);
         color = COLOR_MINIBUTTON_RESET;
-		Element.createAndAdd(shape, color, elementList);
+        element = new Element(shape, color, color, Button.RESET);
+		elementList.add(element);
 	}
 	
 	private void drawElements() {

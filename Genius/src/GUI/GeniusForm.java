@@ -4,6 +4,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -47,12 +50,15 @@ public class GeniusForm extends JFrame {
 	}
     
     public class GeniusPanel extends JPanel implements MouseListener {
+    	
+    	private static final int BUTTON_DELAY = 2000;
         
         public GeniusPanel() {
         	this.pressedButton = null;
             addMouseListener(this);
         }
         private Button pressedButton;
+        private long clickStart;
 
 
         @Override
@@ -69,6 +75,7 @@ public class GeniusForm extends JFrame {
 
         @Override
         public void mousePressed(MouseEvent e) {
+        	this.clickStart = System.currentTimeMillis();
         	if (Main.getGame().getStatus() == Status.PLAY) {
 	        	this.pressedButton = drawer.getPressedButton(e.getPoint());
 	        	if (this.pressedButton != null) {
@@ -82,13 +89,14 @@ public class GeniusForm extends JFrame {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-        	if (this.pressedButton != null) {        	
-	        	if (this.pressedButton != null) {
-	            	disableButton(this.pressedButton);
-	        		Main.getGame().command(this.pressedButton);
-	        		this.pressedButton = null;
-	        	}
-	        	repaint();
+        	if (this.pressedButton != null) {
+        		long clickDuration = System.currentTimeMillis() - this.clickStart;
+        		long extendedTime = Main.getGame().getPlayDelay() - clickDuration;
+        		if ((extendedTime <= 0) || !this.pressedButton.isColorButton()) {
+        			extendedTime = 0;
+        		}
+	        	Timer timer = new Timer();
+	        	timer.schedule(new PostClick(), (int)extendedTime);
         	}
         }
 
@@ -97,6 +105,15 @@ public class GeniusForm extends JFrame {
 
         @Override
         public void mouseExited(MouseEvent e) {}
+        
+    	private class PostClick extends TimerTask {
+    		public void run() {
+            	disableButton(pressedButton);
+        		Main.getGame().command(pressedButton);
+        		pressedButton = null;
+	        	repaint();
+    		}
+    	}
     }
 
 }
