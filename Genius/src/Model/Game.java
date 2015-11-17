@@ -5,6 +5,7 @@ import Controller.Main;
 
 public class Game {
 	
+	private static final String PREFS_FILE_NAME = "genius.dat";
 	private static final int PLAY_DELAY = 1000;
 	private static final int PAUSE_DELAY = 300;
 	private static final int ERROR_DELAY = 2000;
@@ -20,10 +21,17 @@ public class Game {
 	//Apontador para o item da sequência que está sendo digitado agora pelo usuário.
 	private int colorIndex;
 	
-	private int highScore = 0;
+	private int highScore;
 	
 	public Game() {
 		this.speed = Speed.SLOW;
+		this.highScore = 0;
+	}
+	
+	public void save() {
+		Prefs prefs = new Prefs(this.speed, this.highScore, this.colorSequence);
+		FilePrefs filePrefs = new FilePrefs(PREFS_FILE_NAME);
+		filePrefs.save(prefs);
 	}
 	
 	public int getPlayDelay() {
@@ -66,6 +74,25 @@ public class Game {
 	
 	public int getHighScore() {
 		return this.highScore;
+	}
+	
+	public void start() {
+		Prefs prefs;
+		FilePrefs filePrefs = new FilePrefs(PREFS_FILE_NAME);
+		try {
+			prefs = filePrefs.load();
+		} catch (Exception e) {
+			prefs = null;
+		}
+		if (prefs == null) {
+			reset();
+			return;
+		}
+		this.speed = prefs.getSpeed();
+		this.highScore = prefs.getHighScore();
+		this.colorSequence = prefs.getColorSequence();
+		this.colorIndex = 0;
+		Main.getForm().playSequence(colorSequence, getPlayDelay(), getPauseDelay());
 	}
 
 	//Reinicia o jogo.

@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.Main;
@@ -27,6 +28,18 @@ public class GeniusForm extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         panel = new GeniusPanel();
         add(panel);
+        /*Some piece of code*/
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            	try {
+            		Main.getGame().save();
+            	} catch (Exception e) {
+            		System.exit(1);
+            	}
+            	System.exit(0);
+            }
+        });
     }
     
 	public void playSequence(ArrayList<Button> colorSequence, int playDelay, int pauseDelay) {

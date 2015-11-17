@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 		geniusForm = new GeniusForm();
 		currentGame = new Game();
-	    currentGame.reset();
+	    currentGame.start();
 		geniusForm.setVisible(true);
 
 	}
