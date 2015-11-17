@@ -50,8 +50,6 @@ public class GeniusForm extends JFrame {
 	}
     
     public class GeniusPanel extends JPanel implements MouseListener {
-    	
-    	private static final int BUTTON_DELAY = 2000;
         
         public GeniusPanel() {
         	this.pressedButton = null;

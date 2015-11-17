@@ -5,8 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
-import java.awt.geom.Area;
-import java.util.ArrayList;
 
 import Model.Button;
 
@@ -17,24 +15,9 @@ public class Element {
 	private Button button;
 	private boolean enabled = false;
 	
-	/*public static void createAndAdd(Shape shape, Color color, ArrayList<Element> elementList) {
-		Element element = new Element(shape, color);
-		elementList.add(element);
-	}*/
-	
-	/*public static void createAndAdd(Shape shape, Color color, Button button, ArrayList<Element> elementList) {
-		Element element = new Element(shape, color, button);
-		elementList.add(element);
-	}*/
-	
 	public Button getButton() {
 		return this.button;
 	}
-	
-	/*public static void createAndAdd(Shape shape, Color color, Color colorEnabled, Button button, ArrayList<Element> elementList) {
-		Element element = new Element(shape, color, colorEnabled, button);
-		elementList.add(element);
-	}*/
 	
 	public Element(Shape shape, Color color) {
 		this.color = color;
