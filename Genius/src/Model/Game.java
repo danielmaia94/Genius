@@ -9,6 +9,7 @@ public class Game {
 	private static final int PLAY_DELAY = 1000;
 	private static final int PAUSE_DELAY = 300;
 	private static final int ERROR_DELAY = 2000;
+	private static final int BUTTON_DELAY = 500;
 	
 	//Lista de cores, contém a sequência gerada pelo jogo.
 	private ArrayList<Button> colorSequence;
@@ -44,6 +45,10 @@ public class Game {
 			return PLAY_DELAY / 4;
 		}
 		return 0;
+	}
+	
+	public int getButtonDelay() {
+		return BUTTON_DELAY;
 	}
 	
 	public int getPauseDelay() {
